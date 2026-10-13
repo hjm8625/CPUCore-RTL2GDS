@@ -1,0 +1,15 @@
+# It is setRC in the OpenROAD flow script SKY130HD
+# it is quite different pre-route format in OpenROAD with PDK RC
+# Capacitance units are pF/um; resistance units are ohm/um or ohm/via.
+set_layer_rc -layer li1  -capacitance 1.499e-04   -resistance 7.176e-02
+set_layer_rc -layer met1 -capacitance 1.72375e-04 -resistance 8.929e-04
+set_layer_rc -layer met2 -capacitance 1.36233e-04 -resistance 8.929e-04
+set_layer_rc -layer met3 -capacitance 2.14962e-04 -resistance 1.567e-04
+set_layer_rc -layer met4 -capacitance 1.48128e-04 -resistance 1.567e-04
+set_layer_rc -layer met5 -capacitance 1.54087e-04 -resistance 1.781e-05
+
+set_layer_rc -via mcon -resistance 9.249146e-03
+set_layer_rc -via via  -resistance 4.5e-03
+set_layer_rc -via via2 -resistance 3.368786e-03
+set_layer_rc -via via3 -resistance 0.376635e-03
+set_layer_rc -via via4 -resistance 0.00580e-03

@@ -1,0 +1,39 @@
+# Simulation output
+RTL/a.out
+
+# OpenROAD intermediate databases and reports
+build/*.odb
+build/*.route_guide
+build/*_coverage.csv
+build/*.json
+build/*_floorplan.def
+build/*_iopins.def
+build/*_tapcell.def
+build/*_pdn.def
+build/*_global.def
+build/*_repaired.def
+build/*_routed.def
+build/*_drc.rpt
+build/*.maze.log
+
+# Large reproducible analysis files
+build/*.spef
+build/*.cdl
+build/*.spice
+build/*.cir
+build/*.lvsdb
+
+# Keep only the final DEF and final verified GDS in Git.
+# Earlier GDS revisions remain available locally.
+build/*.gds
+!build/CPUCore_m3fix_v2.gds
+
+# Magic extraction intermediates
+build/magic_transistor_lvs/
+*.ext
+*.ext2
+*.nodes
+*.sim
+
+# Superseded report in the project root
+/sky130_drc.txt
