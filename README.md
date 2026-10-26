@@ -56,6 +56,28 @@ The target clock constraint is 50 MHz with a 20 ns period. Timing and power use 
 
 ---
 
+## Layout
+
+### Post-route Database
+
+![OpenROAD post-route database](images/CPU_final_odb.png)
+
+Post-route CPUCore database in OpenROAD, including standard-cell placement, signal routing, clock routing, and the power distribution network.
+
+### Final GDS
+
+![Final CPUCore GDS](images/CPUCore_m3fix_v2.png)
+
+Complete DRC-clean CPUCore layout implemented with the SKY130 HD standard-cell library.
+
+### Detailed GDS View
+
+![Detailed CPUCore GDS layout](images/CPUCore_m3fix_v2_part.png)
+
+Detailed view of the merged SKY130 standard cells, local interconnect, vias, and routed metal layers.
+
+---
+
 ## Final Results
 
 ### Timing and Area
@@ -99,7 +121,7 @@ KLayout LVS was also evaluated, but the SKY130 KLayout extraction deck did not e
 
 ## DRC Repair
 
-The initial streamed layout contained local `m1.1`, `m3.2`, and `m3.6` violations. The Metal 1 issue was corrected in the DEF/layout, and the Metal 3 minimum-spacing and minimum-area violations were repaired with [`klayout/fix_m3_min_area.py`](klayout/fix_m3_min_area.py). The repaired layout then passed the full SKY130 DRC with zero violations.
+The initial streamed layout contained local `m1.1`, `m3.2`, and `m3.6` violations. The Metal 1 issue was corrected in the DEF/layout, and the Metal 3 minimum-spacing and minimum-area violations were repaired with [`drc_lvs/fix_m3_min_area.py`](drc_lvs/fix_m3_min_area.py). The repaired layout then passed the full SKY130 DRC with zero violations.
 
 The final verified layout is:
 
@@ -112,12 +134,14 @@ build/CPUCore_m3fix_v2.gds
 ## Repository Structure
 
 ```text
-RTL/          Verilog RTL and module-level testbenches
-constraints/  SDC timing constraints
-synth/        Yosys synthesis script
-openroad/     Physical-design, post-route, netlist, and PPA scripts
-klayout/      DRC repair and Magic/Netgen LVS scripts
-build/        Selected final netlist, DEF, GDS, DRC, and LVS results
+RTL/                   Verilog RTL modules
+RTL/tb/                Module-level testbenches
+constraints/           SDC timing constraints
+synth/                 Yosys synthesis script
+openroad/              Physical-design, post-route, CDL, and PPA scripts
+drc_lvs/               KLayout DRC repair and Magic/Netgen LVS scripts
+images/                OpenROAD and KLayout screenshots used in this README
+build/                 Selected netlist, DEF, GDS, DRC, and LVS results
 ```
 
 Large reproducible files such as ODB, SPEF, Magic `.ext`, and routing databases are excluded from Git.
@@ -152,7 +176,7 @@ openroad openroad/ppa.tcl
 ```bash
 magic -dnull -noconsole \
   -rcfile /home/a0109/pdks/share/pdk/sky130A/libs.tech/magic/sky130A.magicrc \
-  klayout/magic_extract_transistor_lvs.tcl
+  drc_lvs/magic_extract_transistor_lvs.tcl
 
 netgen-lvs -batch lvs \
   "build/CPUCore_magic_transistor.spice CPUCore" \
