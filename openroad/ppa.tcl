@@ -10,7 +10,7 @@ report_tns
 # Area
 report_design_area
 
-# Power: activity 파일이 없을 때의 추정
+# Power (just assumption) 
 set_power_activity -input -activity 0.1
 set_power_activity -global -activity 0.1
 report_power

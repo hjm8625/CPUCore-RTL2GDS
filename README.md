@@ -135,7 +135,7 @@ yosys -s synth/cpucore_sky130.ys
 ```
 
 ### Physical Design
-# recommend do it with gui (it is fun to watch it)
+- recommend do it with gui (it is fun to watch it)
 ```bash
 openroad -gui openroad/init.tcl
 openroad -gui openroad/post.tcl
